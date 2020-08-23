@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SlonikModule } from './slonik';
 import { createTypeParserPreset } from 'slonik';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { CreatorModule } from './creator/creator.module';
 
 @Module({
   imports: [
@@ -15,6 +18,9 @@ import { createTypeParserPreset } from 'slonik';
         typeParsers: [...createTypeParserPreset()],
       },
     }),
+    AuthModule,
+    UserModule,
+    CreatorModule,
   ],
   controllers: [AppController],
   providers: [AppService],
