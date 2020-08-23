@@ -6,6 +6,13 @@ import { createTypeParserPreset } from 'slonik';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CreatorModule } from './creator/creator.module';
+import { PaymentModule } from './payment/payment.module';
+import { TierModule } from './tier/tier.module';
+import { FileModule } from './file/file.module';
+import { PostModule } from './post/post.module';
+import { CommentModule } from './comment/comment.module';
+import { StripeModule } from './stripe/stripe.module';
+import { PayoutModule } from './payout/payout.module';
 
 @Module({
   imports: [
@@ -21,6 +28,13 @@ import { CreatorModule } from './creator/creator.module';
     AuthModule,
     UserModule,
     CreatorModule,
+    PaymentModule,
+    TierModule,
+    FileModule,
+    PostModule,
+    CommentModule,
+    StripeModule,
+    PayoutModule,
   ],
   controllers: [AppController],
   providers: [AppService],
