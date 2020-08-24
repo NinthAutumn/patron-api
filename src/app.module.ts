@@ -13,7 +13,8 @@ import { PostModule } from './post/post.module';
 import { CommentModule } from './comment/comment.module';
 import { StripeModule } from './stripe/stripe.module';
 import { PayoutModule } from './payout/payout.module';
-import { PsotController } from './psot/psot.controller';
+import { AccessModule } from './access/access.module';
+import { SubscriptionModule } from './subscription/subscription.module';
 
 @Module({
   imports: [
@@ -36,8 +37,10 @@ import { PsotController } from './psot/psot.controller';
     CommentModule,
     StripeModule,
     PayoutModule,
+    AccessModule,
+    SubscriptionModule,
   ],
-  controllers: [AppController, PsotController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
