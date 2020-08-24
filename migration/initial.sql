@@ -409,7 +409,7 @@ BEGIN
     into _exist;
 
     IF NOT _exist THEN
-        raise exception 'User do not have an access to updating post in this creator';
+         raise exception '401';
     END IF;
 
     update post
@@ -459,6 +459,17 @@ BEGIN
         LOOP
             INSERT INTO post_tier(tier_id, post_id) VALUES (_tier_id, _post_id);
         end loop;
+    delete from post_file where post_id = _post_id and attachment = true;
+    if array_length(jsonb_array_elements(_attachments)) > 0 then
+         for _attachment in SELECT * FROM jsonb_array_elements(_attachments)
+            LOOP
+               INSERT INTO file(location, size, file_name, mime_type, created_at, updated_at, user_id, meta)
+                VALUES (_attachment ->> 'location', _attachment ->> 'size'::int8, _attachment ->> 'file_name', _attachment ->> 'mime_type'
+                ,now(),now(), _user_id, _attachment -> 'meta') returning id into _file_id;
+               INSERT INTO post_file(post_id, file_id, attachment)
+                VALUES (_post_id, _file_id, true);
+            end loop;
+    end if;
 END;
 $$ language plpgsql;
 
@@ -485,7 +496,7 @@ BEGIN
     into _exist;
 
     IF NOT _exist THEN
-        raise exception 'User do not have an access to creating post in this creator';
+        raise exception '401';
     END IF;
 
     insert into post(title, content, mature, created_at, updated_at)
@@ -530,6 +541,8 @@ BEGIN
                INSERT INTO file(location, size, file_name, mime_type, created_at, updated_at, user_id, meta)
                 VALUES (_attachment ->> 'location', _attachment ->> 'size'::int8, _attachment ->> 'file_name', _attachment ->> 'mime_type'
                 ,now(),now(), _user_id, _attachment -> 'meta') returning id into _file_id;
+               INSERT INTO post_file(post_id, file_id, attachment)
+                VALUES (_post_id, _file_id, true);
             end loop;
     end if;
 
