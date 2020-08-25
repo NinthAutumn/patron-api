@@ -1,5 +1,4 @@
 import { gender_type, login_strategy } from '../user.enums';
-
 export class UserSelfDTO {
   id: number;
   username: string;
