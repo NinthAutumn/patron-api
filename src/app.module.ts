@@ -15,6 +15,8 @@ import { StripeModule } from './stripe/stripe.module';
 import { PayoutModule } from './payout/payout.module';
 import { AccessModule } from './access/access.module';
 import { SubscriptionModule } from './subscription/subscription.module';
+import { AnonymousStrategy } from './auth/anonymous.strategy';
+import { JwtStrategy } from './auth/jwt.strategy';
 import { PollModule } from './poll/poll.module';
 import { TransactionModule } from './transaction/transaction.module';
 
@@ -45,6 +47,6 @@ import { TransactionModule } from './transaction/transaction.module';
     TransactionModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, JwtStrategy, AnonymousStrategy],
 })
 export class AppModule {}
