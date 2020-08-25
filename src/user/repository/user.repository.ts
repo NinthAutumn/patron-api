@@ -6,10 +6,9 @@ import { UserSelfDTO } from '../dto/user-self.dto';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class UserRepository extends User {
-  constructor(@InjectSlonik() private readonly slonik: Slonik) {
-    super();
-  }
+export class UserRepository {
+  constructor(@InjectSlonik() private readonly slonik: Slonik) {}
+  
   findUserByIdSelf(id: number): Promise<UserSelfDTO> {
     return this.slonik.one(sql`select * from fetch_user_self where id = ${id}`);
   }
