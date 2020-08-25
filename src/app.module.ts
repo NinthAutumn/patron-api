@@ -16,6 +16,7 @@ import { PayoutModule } from './payout/payout.module';
 import { AccessModule } from './access/access.module';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { PollModule } from './poll/poll.module';
+import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { PollModule } from './poll/poll.module';
     AccessModule,
     SubscriptionModule,
     PollModule,
+    TransactionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
