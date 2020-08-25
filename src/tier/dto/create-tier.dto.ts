@@ -3,7 +3,7 @@ import { IsNotEmpty, MaxLength } from 'class-validator';
 export class CreateTierDTO {
     @MaxLength(100)
     @IsNotEmpty()
-    name: string;
+    title: string;
 
     @MaxLength(2000)
     @IsNotEmpty()
@@ -12,7 +12,7 @@ export class CreateTierDTO {
     @IsNotEmpty()
     price: number;
 
-    userID?: number;
+    user_id?: number;
     
     cover: string;
 }
