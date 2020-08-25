@@ -15,6 +15,7 @@ import { StripeModule } from './stripe/stripe.module';
 import { PayoutModule } from './payout/payout.module';
 import { AccessModule } from './access/access.module';
 import { SubscriptionModule } from './subscription/subscription.module';
+import { PollModule } from './poll/poll.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { SubscriptionModule } from './subscription/subscription.module';
     PayoutModule,
     AccessModule,
     SubscriptionModule,
+    PollModule,
   ],
   controllers: [AppController],
   providers: [AppService],
