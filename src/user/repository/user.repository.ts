@@ -10,10 +10,15 @@ export class UserRepository extends User {
   constructor(@InjectSlonik() private readonly slonik: Slonik) {
     super();
   }
-  async findUserByIdSelf(id: number): Promise<UserSelfDTO> {
+  findUserByIdSelf(id: number): Promise<UserSelfDTO> {
     return this.slonik.one(sql`select * from fetch_user_self where id = ${id}`);
   }
-  async findUserByIdSafe(id: number): Promise<UserSafeDTO> {
+  findUserByIdSafe(id: number): Promise<UserSafeDTO> {
     return this.slonik.one(sql`select * from fetch_user_safe where id = ${id}`);
+  }
+  findUserByCredential(credentials: string): Promise<UserSelfDTO> {
+    return this.slonik.maybeOne(
+      sql`select * from fetch_user_self where (username=${credentials} or email = ${credentials})`,
+    );
   }
 }

@@ -358,7 +358,7 @@ create table payout_transaction
     primary key (payout_method_id, transaction_id)
 );
 
-create table subscribe_transaction
+create table subscription_transaction
 (
     subscription_id int8 references subscription on delete cascade,
     transaction_id  int8 references transaction on delete cascade,
