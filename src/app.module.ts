@@ -17,6 +17,8 @@ import { AccessModule } from './access/access.module';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { AnonymousStrategy } from './auth/anonymous.strategy';
 import { JwtStrategy } from './auth/jwt.strategy';
+import { PollModule } from './poll/poll.module';
+import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
   imports: [
@@ -41,6 +43,8 @@ import { JwtStrategy } from './auth/jwt.strategy';
     PayoutModule,
     AccessModule,
     SubscriptionModule,
+    PollModule,
+    TransactionModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy, AnonymousStrategy],
