@@ -22,11 +22,11 @@ export class UserRepository extends User {
       sql`select * from fetch_user_self where (username=${credentials} or email = ${credentials})`,
     );
   }
-  create(createUserDTO: CreateUserDTO) {
+  create(createUserDTO: CreateUserDTO): Promise<number> {
     const { username, password, email } = createUserDTO;
     return this.slonik
-      .query(sql`insert into users (username,password,email,verified,gender,first_name,last_name,created_at,updated_at)
-                 values(${username},${password},${email},false,'other','','',now(),now())
+      .one(sql`insert into users (username,password,email,verified,gender,first_name,last_name,created_at,updated_at)
+                 values(${username},${password},${email},false,'other','','',now(),now()) returning id
     `);
   }
 }
