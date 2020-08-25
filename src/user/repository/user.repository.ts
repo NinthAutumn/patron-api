@@ -4,6 +4,7 @@ import { sql } from 'slonik';
 import { UserSafeDTO } from '../dto/user-safe.dto';
 import { UserSelfDTO } from '../dto/user-self.dto';
 import { Injectable } from '@nestjs/common';
+import { CreateUserDTO } from '../dto/create-user.dto';
 
 @Injectable()
 export class UserRepository extends User {
@@ -20,5 +21,12 @@ export class UserRepository extends User {
     return this.slonik.maybeOne(
       sql`select * from fetch_user_self where (username=${credentials} or email = ${credentials})`,
     );
+  }
+  create(createUserDTO: CreateUserDTO) {
+    const { username, password, email } = createUserDTO;
+    return this.slonik
+      .query(sql`insert into users (username,password,email,verified,gender,first_name,last_name,created_at,updated_at)
+                 values(${username},${password},${email},false,'other','','',now(),now())
+    `);
   }
 }
