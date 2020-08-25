@@ -3,7 +3,9 @@ import { InjectSlonik, Slonik } from '../../slonik';
 import { sql } from 'slonik';
 import { UserSafeDTO } from '../dto/user-safe.dto';
 import { UserSelfDTO } from '../dto/user-self.dto';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class UserRepository extends User {
   constructor(@InjectSlonik() private readonly slonik: Slonik) {
     super();
