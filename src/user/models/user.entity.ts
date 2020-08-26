@@ -9,6 +9,7 @@ export class User {
   strategy: login_strategy;
   first_name: string;
   last_name: string;
+  phone_number: string;
   gender: gender_type;
   created_at: string;
   updated_at: string;
