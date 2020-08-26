@@ -15,9 +15,17 @@ create table users
     strategy   login_strategy,
     first_name varchar,
     last_name  varchar,
+    phone_number varchar,
     gender     gender_type,
     created_at timestamptz,
     updated_at timestamptz
+);
+
+create table user_info(
+    user_id int8 primary key references users,
+    last_logged_in_date timestamptz,
+    last_logged_in_ip varchar,
+    created_ip varchar
 );
 --TODO commissions,aka shop;
 
@@ -75,7 +83,7 @@ create table creator
     description     text,
     creating        text,
     banner_image_id int8 references file,
-    cover           varchar,
+    cover_image_id int8 references file,
     category_id     int4 references category,
     user_id         int8 references users,
     creator_rank_id int4 references creator_rank on delete set null,
