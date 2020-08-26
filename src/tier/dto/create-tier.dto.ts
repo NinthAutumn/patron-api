@@ -14,5 +14,6 @@ export class CreateTierDTO {
 
     creator_id?: number;
     
-    cover: string;
+    @IsNotEmpty()
+    cover_image_id: number;
 }

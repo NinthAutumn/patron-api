@@ -15,5 +15,6 @@ export class UpdateTierDTO {
     @IsNotEmpty()
     price: number;
     
-    cover: string;
+    @IsNotEmpty()
+    cover_image_id: number;
 }

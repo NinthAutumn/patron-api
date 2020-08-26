@@ -11,7 +11,7 @@ export class TierRepository {
 
     createTier(createTierDTO: CreateTierDTO){
         return this.slonik.query(
-            sql`insert into tier (title, description, cover, price, creator_id, created_at, updated_at) values (${createTierDTO.title}, ${createTierDTO.description}, ${createTierDTO.cover}, ${createTierDTO.price}, ${createTierDTO.creator_id}, now(), now())`
+            sql`insert into tier (title, description, cover_image_id, price, creator_id, created_at, updated_at) values (${createTierDTO.title}, ${createTierDTO.description}, ${createTierDTO.cover_image_id}, ${createTierDTO.price}, ${createTierDTO.creator_id}, now(), now())`
             );
     }
 
@@ -29,7 +29,7 @@ export class TierRepository {
 
     updateTier(updateTierDTO: UpdateTierDTO){
         return this.slonik.query(
-            sql`update tier set title = ${updateTierDTO.title}, description = ${updateTierDTO.description}, price = ${updateTierDTO.price}, cover = ${updateTierDTO.cover}, updated_at = now() where id = ${updateTierDTO.id}`
+            sql`update tier set title = ${updateTierDTO.title}, description = ${updateTierDTO.description}, price = ${updateTierDTO.price}, cover_image_id = ${updateTierDTO.cover_image_id}, updated_at = now() where id = ${updateTierDTO.id}`
         );
     }
 }

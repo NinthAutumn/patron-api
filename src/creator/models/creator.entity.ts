@@ -5,7 +5,7 @@ export class Creator {
     description: string;
     creating: string;
     banner_image_id: number;
-    cover: string;
+    cover_image_id: number;
     category_id: number;
     user_id: number;
     creator_rank_id: number;
