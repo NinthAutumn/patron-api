@@ -11,6 +11,7 @@ export class User {
   last_name: string;
   phone_number: string;
   gender: gender_type;
+  refresh_token: string;
   created_at: string;
   updated_at: string;
 }

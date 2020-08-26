@@ -17,6 +17,7 @@ create table users
     last_name  varchar,
     phone_number varchar,
     gender     gender_type,
+    refresh_token varchar,
     created_at timestamptz,
     updated_at timestamptz
 );
