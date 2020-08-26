@@ -1,6 +1,9 @@
 import { IsNotEmpty, MaxLength } from 'class-validator';
 
-export class CreateTierDTO {
+export class UpdateTierDTO {
+    @IsNotEmpty()
+    id: number;
+
     @MaxLength(100)
     @IsNotEmpty()
     title: string;
@@ -11,8 +14,6 @@ export class CreateTierDTO {
 
     @IsNotEmpty()
     price: number;
-
-    creator_id?: number;
     
     cover: string;
 }

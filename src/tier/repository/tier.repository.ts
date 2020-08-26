@@ -1,3 +1,5 @@
+import { UpdateTierDTO } from './../dto/update-tier.dto';
+import { Tier } from './../models/tier.entity';
 import { CreateTierDTO } from './../dto/create-tier.dto';
 import { sql } from 'slonik';
 import { Injectable } from "@nestjs/common";
@@ -9,6 +11,25 @@ export class TierRepository {
 
     createTier(createTierDTO: CreateTierDTO){
         return this.slonik.query(
-            sql`insert into (title, description, cover, price, creator_id, created_at, updated_at) values (${createTierDTO.title}, ${createTierDTO.description}, ${createTierDTO.cover}, ${createTierDTO.price}, ${createTierDTO.user_id}, now(), now())`)
+            sql`insert into tier (title, description, cover, price, creator_id, created_at, updated_at) values (${createTierDTO.title}, ${createTierDTO.description}, ${createTierDTO.cover}, ${createTierDTO.price}, ${createTierDTO.creator_id}, now(), now())`
+            );
+    }
+
+    findTierById(id: number): Promise<Tier>{
+        return this.slonik.one(
+            sql`select * from tier where id = ${id}`
+        );
+    }
+
+    findTierByName(creator_id: number, title: string): Promise<Tier> {
+        return this.slonik.one(
+            sql`select * from tier where title = ${title} and creator_id`
+        );
+    }
+
+    updateTier(updateTierDTO: UpdateTierDTO){
+        return this.slonik.query(
+            sql`update tier set title = ${updateTierDTO.title}, description = ${updateTierDTO.description}, price = ${updateTierDTO.price}, cover = ${updateTierDTO.cover}, updated_at = now() where id = ${updateTierDTO.id}`
+        );
     }
 }
