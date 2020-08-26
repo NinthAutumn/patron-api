@@ -8,7 +8,5 @@ export class AccessService {
 
     findAccessByUserID(user_id: number): Promise<Access>{
         return this.accessRepository.findByUserID(user_id);
-    }
-
-    
+    }    
 }

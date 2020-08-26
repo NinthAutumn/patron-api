@@ -1,4 +1,3 @@
-import { User } from './../../user/models/user.entity';
 export class Creator {
     id: number;
     name: string;
@@ -9,7 +8,6 @@ export class Creator {
     cover: string;
     category_id: number;
     user_id: number;
-    user: User;
     creator_rank_id: number;
     updated_at: string;
     created_at: string;
