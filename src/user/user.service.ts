@@ -22,7 +22,11 @@ export class UserService {
   async verifyUser(id: number) {
     return this.userRepository.verifyUser(id);
   }
-  async createUser(createUserDTO: CreateUserDTO) {
+
+  findOneUserByCredential(credential: string) {
+    return this.userRepository.findUserByCredential(credential);
+  }
+  createUser(createUserDTO: CreateUserDTO) {
     return this.userRepository.create(createUserDTO);
   }
 }

@@ -1,4 +1,5 @@
 import { gender_type, login_strategy } from '../user.enums';
+import { Exclude } from 'class-transformer';
 export class UserSelfDTO {
   id: number;
   username: string;
@@ -11,4 +12,7 @@ export class UserSelfDTO {
   created_at: string;
   updated_at: string;
   verified: Boolean;
+
+  @Exclude()
+  password: string;
 }

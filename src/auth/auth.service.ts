@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { LocalLoginDTO } from './dto/local-login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../user/models/user.entity';
@@ -6,7 +10,7 @@ import { UserService } from '../user/user.service';
 import { VerifyUserDTO } from './dto/verify-user.dto';
 import { CreateUserDTO } from '../user/dto/create-user.dto';
 import { create } from 'domain';
-import { genSalt, hash } from 'bcryptjs';
+import { genSalt, hash, compare } from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
@@ -14,12 +18,31 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly userService: UserService,
   ) {}
-  async localLogin(localLoginDTO: LocalLoginDTO) {}
+  async localLogin(localLoginDTO: LocalLoginDTO) {
+    const { credential, password } = localLoginDTO;
+    const user = await this.userService.findOneUserByCredential(credential);
+    if (!user) {
+      throw new UnauthorizedException(
+        `入力されたパスワードまたはユーザー名・Eメールが間違っています`,
+      );
+    }
+    if (await this.verifyPassword(password, user.password)) {
+      return await this.createAuthTokens(user.id);
+    } else {
+      throw new UnauthorizedException(
+        `入力されたパスワードまたはユーザー名・Eメールが間違っています`,
+      );
+    }
+  }
   async createJWTToken(payload: any, time: number = 100000) {
     // console.log(process.env.JWT_SECRET);
     return await this.jwtService.sign(payload, {
       expiresIn: time,
     });
+  }
+
+  verifyPassword(password: string, hashed_password: string): Promise<Boolean> {
+    return compare(password, hashed_password);
   }
   async hashPassword(password) {
     const salt = await genSalt(10);
