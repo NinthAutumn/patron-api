@@ -20,6 +20,8 @@ export class AuthService {
   ) {}
   async localLogin(localLoginDTO: LocalLoginDTO) {
     const { credential, password } = localLoginDTO;
+    console.log(localLoginDTO);
+    return 
     const user = await this.userService.findOneUserByCredential(credential);
     if (!user) {
       throw new UnauthorizedException(

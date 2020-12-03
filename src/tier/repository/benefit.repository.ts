@@ -1,6 +1,5 @@
 import { CreateBenefitDTO } from './../dto/create-benefit.dto';
-import { Slonik } from './../../slonik/interfaces/slonik.interface';
-import { InjectSlonik } from "src/slonik";
+import { Slonik,InjectSlonik } from '../../slonik';
 import { sql } from 'slonik';
 import { UpdateBenefitDTO } from '../dto/update-benefit.dto';
 

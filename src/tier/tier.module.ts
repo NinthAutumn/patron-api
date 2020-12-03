@@ -6,8 +6,8 @@ import { TierController } from './tier.controller';
 import { TierService } from './tier.service';
 
 @Module({
-  imports : [TierRepository, AccessModule, BenefitRepository],
+  imports : [AccessModule],
   controllers: [TierController],
-  providers: [TierService]
+  providers: [TierService,TierRepository,BenefitRepository]
 })
 export class TierModule {}

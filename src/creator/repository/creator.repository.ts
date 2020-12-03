@@ -1,6 +1,6 @@
 import { UpdateCreatorDTO } from './../dto/update-creator.dto';
-import { InjectSlonik } from './../../slonik/inject-slonik.decorator';
-import { Slonik } from './../../slonik/interfaces/slonik.interface';
+import { Slonik,InjectSlonik } from '../../slonik';
+
 import { Injectable } from '@nestjs/common';
 import { sql } from 'slonik';
 import { CreateCreatorDTO } from '../dto/create-creator.dto';

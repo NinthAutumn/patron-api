@@ -11,8 +11,9 @@ export class CreateTierDTO {
 
     @IsNotEmpty()
     price: number;
-
-    creator_id?: number;
+    
+    @IsNotEmpty()
+    project_id: number;
     
     @IsNotEmpty()
     cover_image_id: number;

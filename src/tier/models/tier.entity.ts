@@ -4,7 +4,7 @@ export class Tier {
     description: string;
     cover_image_id: number;
     price: number;
-    creator_id: number;
+    project_id: number;
     created_at: string;
     updated_at: string;
 }

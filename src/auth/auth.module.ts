@@ -1,20 +1,20 @@
-import { Module, Get, Body } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UserModule } from '../user/user.module';
 import { LocalLoginDTO } from './dto/local-login.dto';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
-  imports: [UserModule],
+  imports: [UserModule, JwtModule.register({
+    secret: process.env.JWT_SECRET,
+    signOptions: {
+      expiresIn: 86400,
+    },
+  })],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService,JwtStrategy],
+  exports:[AuthService]
 })
-export class AuthModule {
-  constructor(private readonly authService: AuthService) {}
-  @Get('local')
-  async authenticateLocalUser(@Body() localLoginDTO: LocalLoginDTO) {
-    return this.authService.localLogin(localLoginDTO);
-  }
-
-  async verifyUser() {}
-}
+export class AuthModule {}

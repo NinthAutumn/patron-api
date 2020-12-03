@@ -7,7 +7,7 @@ import { CreateUserDTO } from './dto/create-user.dto';
 export class UserService {
   constructor(
     private readonly userRepository: UserRepository,
-    private readonly jwtService: JwtService,
+    // private readonly jwtService: JwtService,
   ) {}
 
   async findOne(id: number, safe: boolean) {

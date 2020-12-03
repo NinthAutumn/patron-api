@@ -10,6 +10,7 @@ import { PaymentModule } from './payment/payment.module';
 import { TierModule } from './tier/tier.module';
 import { FileModule } from './file/file.module';
 import { PostModule } from './post/post.module';
+import { MorganModule, MorganInterceptor } from 'nest-morgan';
 import { CommentModule } from './comment/comment.module';
 import { StripeModule } from './stripe/stripe.module';
 import { PayoutModule } from './payout/payout.module';
@@ -19,6 +20,9 @@ import { AnonymousStrategy } from './auth/anonymous.strategy';
 import { JwtStrategy } from './auth/jwt.strategy';
 import { PollModule } from './poll/poll.module';
 import { TransactionModule } from './transaction/transaction.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { ProjectModule } from './project/project.module';
+
 
 @Module({
   imports: [
@@ -42,11 +46,16 @@ import { TransactionModule } from './transaction/transaction.module';
     StripeModule,
     PayoutModule,
     AccessModule,
+    MorganModule.forRoot(),
     SubscriptionModule,
     PollModule,
     TransactionModule,
+    ProjectModule,
   ],
   controllers: [AppController],
-  providers: [AppService, JwtStrategy, AnonymousStrategy],
+  providers: [AppService, JwtStrategy, AnonymousStrategy,  {
+    provide: APP_INTERCEPTOR,
+    useClass: MorganInterceptor('dev'),
+  },],
 })
 export class AppModule {}

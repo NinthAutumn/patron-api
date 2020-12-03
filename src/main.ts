@@ -12,7 +12,14 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   );
+  app.enableCors({
+    exposedHeaders: ["Authorization", "content-type", "TrackId", 'refresh'],
+    origin: '*',
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    'optionsSuccessStatus': 200
+  });
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
-  await app.listen(3000);
+  await app.listen(5000);
 }
 bootstrap();

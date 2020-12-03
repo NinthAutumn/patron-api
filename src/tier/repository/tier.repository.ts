@@ -3,7 +3,7 @@ import { Tier } from './../models/tier.entity';
 import { CreateTierDTO } from './../dto/create-tier.dto';
 import { sql } from 'slonik';
 import { Injectable } from "@nestjs/common";
-import { InjectSlonik, Slonik } from "src/slonik";
+import { InjectSlonik, Slonik } from "../../slonik";
 
 @Injectable()
 export class TierRepository {

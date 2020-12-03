@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AccessController } from './access.controller';
 import { AccessService } from './access.service';
-import { CreatorAccessRepository } from './repository/creator-access.repository';
+import { ProjectAccessRepository } from './repository/project-access.repository';
 import { AccessRepository } from './repository/access.repository';
 
 @Module({
-  imports: [CreatorAccessRepository, AccessRepository],
+  imports: [],
   controllers: [AccessController],
-  providers: [AccessService],
+  providers: [AccessService,ProjectAccessRepository, AccessRepository],
   exports: [AccessService]
 })
 export class AccessModule {}

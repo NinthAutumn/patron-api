@@ -1,5 +1,5 @@
 import { User } from '../models/user.entity';
-import { InjectSlonik, Slonik } from '../../slonik';
+import { Slonik,InjectSlonik } from '../../slonik';
 import { sql } from 'slonik';
 import { UserSafeDTO } from '../dto/user-safe.dto';
 import { UserSelfDTO } from '../dto/user-self.dto';

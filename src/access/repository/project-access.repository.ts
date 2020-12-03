@@ -1,15 +1,17 @@
 import { Slonik,InjectSlonik } from '../../slonik';
+
 import { Injectable } from "@nestjs/common";
-import { Access } from '../models/access.entity';
+import { ProjectAccess } from '../models/creator-access.entity';
 import { sql } from 'slonik';
 
 @Injectable()
-export class AccessRepository {
+export class ProjectAccessRepository {
     constructor(@InjectSlonik() private readonly slonik: Slonik) {}
-
-    findByUserID(user_id): Promise<Access>{
+    
+    findByUserId(user_id: number): Promise<ProjectAccess>{
         return this.slonik.maybeOne(
-            sql`select a.* from access a inner join creator_access ca on ca.user_id = ${user_id}`
+            sql`select * from project_access where user_id = ${user_id}`
         );
     }
+
 }
